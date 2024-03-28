@@ -10,5 +10,6 @@ import SwiftUI
 extension Color {
     enum Dinotis {
         static let lightPrimary = Color("light-primary")
+        static let primary = Color("primary")
     }
 }

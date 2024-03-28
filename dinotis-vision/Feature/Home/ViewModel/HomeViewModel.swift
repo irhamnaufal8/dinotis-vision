@@ -26,5 +26,20 @@ final class HomeViewModel {
     let banners = Banner.homeBanner
     var currentSection: EventType = .newest
     
-    var sessions = Session.sample
+    var sessions: [Session] {
+        switch currentSection {
+        case .newest:
+            Session.sample
+        case .comingSoon:
+            Session.sample2
+        }
+    }
+    var currentSession: Session?
+    
+    var isShowSessionDetail = false
+    
+    func seeDetailSession(_ session: Session) {
+        currentSession = session
+        isShowSessionDetail = true
+    }
 }

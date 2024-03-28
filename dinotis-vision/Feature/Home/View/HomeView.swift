@@ -14,10 +14,11 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(alignment: .leading, spacing: 16) {
+                LazyVStack(alignment: .leading, spacing: 16, pinnedViews: .sectionHeaders) {
                     bannerView
                     mainContent
                 }
+                .blur(radius: viewModel.isShowSessionDetail ? 10 : 0)
             }
             .toolbar { toolbar }
         }
@@ -30,6 +31,9 @@ extension HomeView {
             ToolbarItem(placement: .topBarLeading) {
                 Image.logoFullWhite
                     .blendMode(.screen)
+                    .popover(isPresented: $viewModel.isShowSessionDetail, arrowEdge: .leading) {
+                        detailSession
+                    }
             }
             
             ToolbarItem(placement: .topBarTrailing) {
@@ -50,8 +54,6 @@ extension HomeView {
                     .buttonBorderShape(.circle)
                 }
             }
-            
-            
         }
     }
     
@@ -80,25 +82,11 @@ extension HomeView {
     
     @ViewBuilder
     var mainContent: some View {
-        VStack(spacing: 20) {
-            HStack {
-                Text("Semua Event")
-                    .font(.largeTitle)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                
-                Picker("", selection: $viewModel.currentSection) {
-                    ForEach(EventType.allCases, id: \.name) { type in
-                        Text(type.name)
-                            .tag(type)
-                    }
-                }
-                .pickerStyle(.segmented)
-            }
-            
+        Section {
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 200), spacing: 16)], spacing: 16, content: {
                 ForEach(viewModel.sessions) { session in
                     Button {
-                        
+                        viewModel.seeDetailSession(session)
                     } label: {
                         session.poster
                             .resizable()
@@ -124,7 +112,7 @@ extension HomeView {
                                     
                                     Group {
                                         if session.price == 0 {
-                                            Label("Free", systemImage: "ticket")
+                                            Label("Gratis", systemImage: "ticket")
                                                 .font(.caption)
                                                 .padding(4)
                                                 .padding(.horizontal, 4)
@@ -147,9 +135,96 @@ extension HomeView {
                     .buttonBorderShape(.roundedRectangle(radius: 12))
                 }
             })
+            .animation(.bouncy, value: viewModel.currentSection)
+            .padding(.horizontal, 28)
+            .padding(.vertical)
+        } header: {
+            HStack {
+                Text("Semua Event")
+                    .font(.largeTitle)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
+                Picker("", selection: $viewModel.currentSection) {
+                    ForEach(EventType.allCases, id: \.name) { type in
+                        Text(type.name)
+                            .tag(type)
+                    }
+                }
+                .pickerStyle(.segmented)
+            }
+            .padding(.vertical)
+            .padding(.horizontal, 28)
         }
-        .padding(.horizontal, 28)
-        .padding(.vertical)
+        
+    }
+    
+    @ViewBuilder
+    var detailSession: some View {
+        if let session = viewModel.currentSession {
+            ScrollView {
+                VStack(spacing: 24) {
+                    session.poster
+                        .resizable()
+                        .scaledToFit()
+                    
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text(session.title)
+                            .font(.largeTitle)
+                        
+                        Button {
+                            
+                        } label: {
+                            HStack {
+                                session.creator.avatar
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 30, height: 30)
+                                    .clipShape(.circle)
+                                
+                                Text(session.creator.name)
+                            }
+                        }
+                    }
+                    .padding(.horizontal)
+                    .frame(maxWidth: .infinity, alignment: .topLeading)
+                    
+                    Divider()
+                    
+                    Text(session.description)
+                        .foregroundStyle(.secondary)
+                        .padding(.horizontal)
+                        .frame(maxWidth: .infinity, alignment: .topLeading)
+                    
+                    Color.clear
+                        .frame(height: 160)
+                }
+            }
+            .overlay(alignment: .bottom) {
+                VStack(spacing: 0) {
+                    Label(session.price == 0 ? "Gratis" : session.price.toRupiah, systemImage: "cart")
+                        .font(.title)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding()
+                        .background(.ultraThinMaterial)
+                    
+                    Button {
+                        
+                    } label: {
+                        Text("Book")
+                            .font(.headline)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color.Dinotis.primary.gradient)
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                    }
+                    .buttonStyle(.plain)
+                    .buttonBorderShape(.roundedRectangle(radius: 12))
+                    .padding()
+                    .background(.regularMaterial)
+                }
+            }
+            .frame(width: 500, height: 700)
+        }
     }
 }
 
