@@ -206,6 +206,7 @@ extension HomeView {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding()
                         .background(.ultraThinMaterial)
+                        .cornerRadius(16, corners: [.topLeft, .topRight])
                     
                     Button {
                         

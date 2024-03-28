@@ -22,6 +22,7 @@
 		4B95D6932BB53D1E00E40F0A /* Color+Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B95D6922BB53D1E00E40F0A /* Color+Default.swift */; };
 		4B95D6962BB53EE600E40F0A /* Int+toRupiah.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B95D6952BB53EE600E40F0A /* Int+toRupiah.swift */; };
 		4B95D6992BB544E200E40F0A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B95D6982BB544E200E40F0A /* Constants.swift */; };
+		4B95D69E2BB5820E00E40F0A /* RoundedShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B95D69D2BB5820E00E40F0A /* RoundedShape.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		4B95D6922BB53D1E00E40F0A /* Color+Default.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Default.swift"; sourceTree = "<group>"; };
 		4B95D6952BB53EE600E40F0A /* Int+toRupiah.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+toRupiah.swift"; sourceTree = "<group>"; };
 		4B95D6982BB544E200E40F0A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		4B95D69D2BB5820E00E40F0A /* RoundedShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedShape.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,7 +207,8 @@
 		4B95D6942BB53ED800E40F0A /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				4B95D6952BB53EE600E40F0A /* Int+toRupiah.swift */,
+				4B95D69A2BB581D600E40F0A /* SwiftUI */,
+				4B95D69B2BB581E200E40F0A /* Swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -216,6 +219,30 @@
 				4B95D6982BB544E200E40F0A /* Constants.swift */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		4B95D69A2BB581D600E40F0A /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				4B95D69C2BB581F900E40F0A /* Shape */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
+		4B95D69B2BB581E200E40F0A /* Swift */ = {
+			isa = PBXGroup;
+			children = (
+				4B95D6952BB53EE600E40F0A /* Int+toRupiah.swift */,
+			);
+			path = Swift;
+			sourceTree = "<group>";
+		};
+		4B95D69C2BB581F900E40F0A /* Shape */ = {
+			isa = PBXGroup;
+			children = (
+				4B95D69D2BB5820E00E40F0A /* RoundedShape.swift */,
+			);
+			path = Shape;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -332,6 +359,7 @@
 				4B95D6882BB480D100E40F0A /* HomeViewModel.swift in Sources */,
 				4B95D6932BB53D1E00E40F0A /* Color+Default.swift in Sources */,
 				4B95D68D2BB4A19200E40F0A /* Banner.swift in Sources */,
+				4B95D69E2BB5820E00E40F0A /* RoundedShape.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
